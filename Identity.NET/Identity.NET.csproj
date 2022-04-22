@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+    <Authors>Identity.NET</Authors>
+    <Company>S Christison</Company>
+    <Copyright>S Christison ©2022</Copyright>
+    <PackageReleaseNotes>https://github.com/HypsyNZ/Identity.NET/tree/master/Identity.NET</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/HypsyNZ/Identity.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>identity, service, persist, strong</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <AssemblyName>Identity.NET</AssemblyName>
+    <RootNamespace>Identity.NET</RootNamespace>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>X:\Identity.snk</AssemblyOriginatorKeyFile>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>
