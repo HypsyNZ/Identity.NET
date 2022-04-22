@@ -21,6 +21,8 @@
     <RootNamespace>Identity.NET</RootNamespace>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>X:\Identity.snk</AssemblyOriginatorKeyFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
 
