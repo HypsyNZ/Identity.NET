@@ -1,5 +1,7 @@
 # Identity.NET
 
+[![Nuget](https://img.shields.io/nuget/v/Identity.NET)](https://www.nuget.org/packages/Identity.NET/)
+
 Provides a Unique Identifier for the current PC and facility to Encrypt and Decrypt strings using that Identity
 
 
