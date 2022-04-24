@@ -1,3 +1,7 @@
+### Version 1.0.1
+- [x] Add `UniqueIdentity.UUID` (Unique Identity for this PC)
+- [x] Refactoring
+
 ### Version 1.0.0
 - [x] Add UniqueIdentity
 - [x] Add Encrypt
