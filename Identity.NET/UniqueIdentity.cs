@@ -26,8 +26,9 @@ namespace Identity.NET
         /// <param name="useStrongIdentity">True if strong identity should be used, strong identity doesn't change if the user deletes the keys</param>
         /// <param name="pathToIdentity">The registry path for the identity</param>
         /// <param name="password">The additional password your data is secured with</param>
+        /// <param name="allowMixed">Allow the use of mixed keys when using Weak Keys (Recommended)</param>
         /// <exception cref="Exception">Throws when identity is weak</exception>
-        public static string Initialize(bool useStrongIdentity = true, string pathToIdentity = "", string password = "")
+        public static string Initialize(bool useStrongIdentity = true, string pathToIdentity = @"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET", string password = "Identity.NET", bool allowMixed = true)
         {
             Started = true;
             return Uid.Initialize(useStrongIdentity, pathToIdentity, password);

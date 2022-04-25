@@ -20,8 +20,9 @@ namespace Identity.NET.Id
         /// <para>If your identity key matches the weak key, Your identity is weak</para>
         /// <param name="useStrongIdentity">True if strong identity should be used, strong identity doesn't change if the user deletes the keys</param>
         /// <param name="password">The additional password your data is to be secured with</param>
+        /// <param name="allowMixed">Allow the use of mixed keys when using Weak Keys (True by default)</param>
         /// </summary>
-        internal static string GetNewMachineID(bool useStrongIdentity = true, string password = "")
+        internal static string GetNewMachineID(bool useStrongIdentity = true, string password = "", bool allowMixed = true)
         {
             string MotherboardUUID = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\HardwareConfig", "LastConfig", "");
 
@@ -44,13 +45,15 @@ namespace Identity.NET.Id
 
             string finalUniqueWeak = ("F" + weakOne + "-" + "F" + weakTwo);
             string finalUniqueIDStrong = builder + "-" + MotherboardUUID;
+
             string finalUniqueID = (builder != "" ? builder : "F" + weakOne) + "-" + (MotherboardUUID != "" ? MotherboardUUID : "F" + weakTwo);
 
-            bool isStrong = finalUniqueID == finalUniqueIDStrong;
+            bool isMixed = finalUniqueWeak == finalUniqueID ? false : finalUniqueIDStrong == finalUniqueID ? false : true;
 
             string half = finalUniqueID.Substring(50);
 
-            if (!isStrong && useStrongIdentity) { throw new Exception("Identity is Weak"); }
+            // Don't write anything to the identity and cancel
+            if (isMixed && useStrongIdentity) { throw new Exception("Identity is Weak and Use Strong Identity is Enabled"); }
 
             string e_string = Crypt.Encrypt(finalUniqueID, half, password);
             string e_string_weak = Crypt.Encrypt(finalUniqueWeak, half, password);
@@ -60,8 +63,13 @@ namespace Identity.NET.Id
             Registry.SetValue(Path, "Identity_Weak", e_string_weak);
             Registry.SetValue(Path, "Identity_Strong", e_string_strong);
 
-            string debug = UUID.ToString() + "," + Hash.ToString() + "," + isStrong.ToString();
+            string debug = UUID.ToString() + "," + Hash.ToString() + ",Mixed:" + isMixed.ToString();
+
             Registry.SetValue(Path, "Debug", debug);
+
+            if (useStrongIdentity) { return finalUniqueID; }
+
+            if (isMixed && !allowMixed) { throw new Exception("Identity is Weak and Mixed"); }
 
             return finalUniqueID;
         }

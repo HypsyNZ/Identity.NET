@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2</FileVersion>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
+    <FileVersion>1.0.3</FileVersion>
     <Authors>S Christison</Authors>
     <Company>S Christison</Company>
     <Copyright>S Christison ©2022</Copyright>
@@ -28,6 +28,7 @@
     <Description>Provides a Unique Identity to the Local PC and facilitates encrypting/decrypting strings based on that Identity</Description>
     <PackageProjectUrl>https://github.com/HypsyNZ/Identity.NET</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

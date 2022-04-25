@@ -10,18 +10,9 @@ namespace Identity.NET.Id
     {
         internal static string UniqueID = null;
 
-        internal static string Initialize(bool useStrongIdentity = true, string pathToIdentity = "", string password = "")
+        internal static string Initialize(bool useStrongIdentity = true, string pathToIdentity = "", string password = "", bool allowMixed = true)
         {
-            switch (pathToIdentity)
-            {
-                case "":
-                    Machine.Path = @"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET";
-                    break;
-
-                default:
-                    Machine.Path = pathToIdentity;
-                    break;
-            }
+            Machine.Path = pathToIdentity;
 
             string ID = Registry.GetValue(Machine.Path, "Identity", "") as string;
             string IDW = Registry.GetValue(Machine.Path, "Identity_Weak", "") as string;
@@ -29,7 +20,7 @@ namespace Identity.NET.Id
 
             if (string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(IDS) || string.IsNullOrEmpty(IDW))
             {
-                UniqueID = Machine.GetNewMachineID(useStrongIdentity, password);
+                UniqueID = Machine.GetNewMachineID(useStrongIdentity, password, allowMixed);
             }
             else
             {
