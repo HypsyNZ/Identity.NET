@@ -27,7 +27,10 @@ namespace Identity.NET
                         cs.Write(cipherBytes, 0, cipherBytes.Length);
                         cs.Close();
                     }
-                    c = Encoding.Unicode.GetString(ms.ToArray());
+
+                    char[] charsToTrim = { '\0' };
+                    var s = Encoding.Unicode.GetString(ms.ToArray());
+                    c = s.TrimEnd(charsToTrim);
                 };
             }
             return c;

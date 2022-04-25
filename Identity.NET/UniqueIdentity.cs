@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Identity.NET
 {
@@ -28,7 +29,8 @@ namespace Identity.NET
         /// <param name="password">The additional password your data is secured with</param>
         /// <param name="allowMixed">Allow the use of mixed keys when using Weak Keys (Recommended)</param>
         /// <exception cref="Exception">Throws when identity is weak</exception>
-        public static string Initialize(bool useStrongIdentity = true, string pathToIdentity = @"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET", string password = "Identity.NET", bool allowMixed = true)
+        /// <returns>Bool Indicating if the ID is Initialized</returns>
+        public static bool Initialize(bool useStrongIdentity = true, string pathToIdentity = @"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET", string password = "Identity.NET", bool allowMixed = true)
         {
             Started = true;
             return Uid.Initialize(useStrongIdentity, pathToIdentity, password);

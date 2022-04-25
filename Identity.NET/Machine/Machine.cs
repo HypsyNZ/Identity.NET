@@ -22,7 +22,7 @@ namespace Identity.NET.Id
         /// <param name="password">The additional password your data is to be secured with</param>
         /// <param name="allowMixed">Allow the use of mixed keys when using Weak Keys (True by default)</param>
         /// </summary>
-        internal static string GetNewMachineID(bool useStrongIdentity = true, string password = "", bool allowMixed = true)
+        internal static IdentitySuccess GetNewMachineID(bool useStrongIdentity = true, string password = "", bool allowMixed = true)
         {
             string MotherboardUUID = (string)Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\HardwareConfig", "LastConfig", "");
 
@@ -54,8 +54,8 @@ namespace Identity.NET.Id
             string half = finalUniqueID.Substring(50);
 
             // Don't write anything to the identity and cancel
-            if (useStrongIdentity && !isStrong) { throw new Exception("Identity is Weak and Use Strong Identity is Enabled"); }
-            if (!useStrongIdentity && isMixed && !allowMixed) { throw new Exception("Identity is Weak and Mixed"); }
+            if (useStrongIdentity && !isStrong) { return new IdentitySuccess(false, null); }
+            if (!useStrongIdentity && isMixed && !allowMixed) { return new IdentitySuccess(false, null); }
 
             string e_string = Crypt.Encrypt(finalUniqueID, half, password);
             string e_string_weak = Crypt.Encrypt(finalUniqueWeak, half, password);
@@ -67,9 +67,7 @@ namespace Identity.NET.Id
             Registry.SetValue(Path, "Identity_Strong", e_string_strong);
             Registry.SetValue(Path, "Debug", debug);
 
-            if (useStrongIdentity) { return finalUniqueID; }
-
-            return finalUniqueID;
+            return new IdentitySuccess(true, e_string);
         }
     }
 }

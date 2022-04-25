@@ -23,10 +23,18 @@ Decrypt a `string` using the local identity
 UniqueIdentity.Decrypt(string);
 ```
 
+Get the local `UUID` as a `string`
+
+```cs 
+string identity = UniqueIdentity.UUID;
+```
+
+
+
 # Full Usage Options
 
 | Argument  | Description   | Default |
-| --------- | -----------   | ------- |
+| ------------ | ------------   | ---------- |
 | pathToIdentity | Full Registry Path to store the `Identity` | `@"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET"`
 | password | An Additional password to secure the `Identity` | `Identity.NET`|
 | useStrongIdentity | True if the identity is only valid if it is `Strong` | `true` (recommended)
@@ -73,6 +81,14 @@ You can tell if you have a `Strong` or `Weak` identity because your `Identity` w
 You have a `Mixed` identity if it doesn't match either of them
 
 The `Strong` Identity may not be available on all PCs
+
+
+# Checking ID
+
+![https://i.imgur.com/lSKqtFm.png](https://i.imgur.com/lSKqtFm.png)
+
+When you `Initialize()` the `Identity` it will return a bool that indicates if the `Identity` was created/loaded correctly, You can use this information in your application to `Exit` when a valid `Identity` can't be used.
+
 
 
 # Safety

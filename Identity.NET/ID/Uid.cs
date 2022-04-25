@@ -8,9 +8,9 @@ namespace Identity.NET.Id
 {
     internal static class Uid
     {
-        internal static string UniqueID = null;
+        internal static volatile string UniqueID = null;
 
-        internal static string Initialize(bool useStrongIdentity = true, string pathToIdentity = "", string password = "", bool allowMixed = true)
+        internal static bool Initialize(bool useStrongIdentity = true, string pathToIdentity = "", string password = "", bool allowMixed = true)
         {
             Machine.Path = pathToIdentity;
 
@@ -20,7 +20,15 @@ namespace Identity.NET.Id
 
             if (string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(IDS) || string.IsNullOrEmpty(IDW))
             {
-                UniqueID = Machine.GetNewMachineID(useStrongIdentity, password, allowMixed);
+                IdentitySuccess success = Machine.GetNewMachineID(useStrongIdentity, password, allowMixed);
+                if (success.Success == true)
+                {
+                    string half = success.Identity.Substring(50);
+                    UniqueID = Crypt.Decrypt(success.Identity, half, password);
+                    return true;
+                }
+
+                return false;
             }
             else
             {
@@ -41,11 +49,11 @@ namespace Identity.NET.Id
                 if (!string.IsNullOrEmpty(half))
                 {
                     UniqueID = Crypt.Decrypt(ID, half, password);
-                    return UniqueID;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
     }
 }
