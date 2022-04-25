@@ -1,3 +1,6 @@
+### Version 1.0.4
+- [x] Fixed a bug that allowed `Mixed Identity` accidentally
+
 ### Version 1.0.3
 - [x] Add `Mixed` Identity
 - [x] Add Defaults to simplify usage
