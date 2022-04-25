@@ -54,22 +54,19 @@ namespace Identity.NET.Id
 
             // Don't write anything to the identity and cancel
             if (isMixed && useStrongIdentity) { throw new Exception("Identity is Weak and Use Strong Identity is Enabled"); }
+            if (!useStrongIdentity && isMixed && !allowMixed) { throw new Exception("Identity is Weak and Mixed"); }
 
             string e_string = Crypt.Encrypt(finalUniqueID, half, password);
             string e_string_weak = Crypt.Encrypt(finalUniqueWeak, half, password);
             string e_string_strong = Crypt.Encrypt(finalUniqueIDStrong, half, password);
+            string debug = UUID.ToString() + "," + Hash.ToString() + ",Mixed:" + isMixed.ToString();
 
             Registry.SetValue(Path, "Identity", e_string);
             Registry.SetValue(Path, "Identity_Weak", e_string_weak);
             Registry.SetValue(Path, "Identity_Strong", e_string_strong);
-
-            string debug = UUID.ToString() + "," + Hash.ToString() + ",Mixed:" + isMixed.ToString();
-
             Registry.SetValue(Path, "Debug", debug);
 
             if (useStrongIdentity) { return finalUniqueID; }
-
-            if (isMixed && !allowMixed) { throw new Exception("Identity is Weak and Mixed"); }
 
             return finalUniqueID;
         }
