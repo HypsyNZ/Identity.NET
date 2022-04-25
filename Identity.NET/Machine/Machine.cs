@@ -48,12 +48,13 @@ namespace Identity.NET.Id
 
             string finalUniqueID = (builder != "" ? builder : "F" + weakOne) + "-" + (MotherboardUUID != "" ? MotherboardUUID : "F" + weakTwo);
 
+            bool isStrong = finalUniqueIDStrong == finalUniqueID;
             bool isMixed = finalUniqueWeak == finalUniqueID ? false : finalUniqueIDStrong == finalUniqueID ? false : true;
 
             string half = finalUniqueID.Substring(50);
 
             // Don't write anything to the identity and cancel
-            if (isMixed && useStrongIdentity) { throw new Exception("Identity is Weak and Use Strong Identity is Enabled"); }
+            if (useStrongIdentity && !isStrong) { throw new Exception("Identity is Weak and Use Strong Identity is Enabled"); }
             if (!useStrongIdentity && isMixed && !allowMixed) { throw new Exception("Identity is Weak and Mixed"); }
 
             string e_string = Crypt.Encrypt(finalUniqueID, half, password);
