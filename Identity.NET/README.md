@@ -1,3 +1,6 @@
+### Version 1.0.5
+- [x] Fixed a bug that could mistake a `Mixed Identity` for a `Strong Identity`
+
 ### Version 1.0.4
 - [x] Fixed a bug that allowed `Mixed Identity` accidentally
 
