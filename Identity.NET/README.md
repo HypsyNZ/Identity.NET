@@ -1,3 +1,7 @@
+### Version 1.0.6
+- [x] Added `bool` indicating successful loading/creation of `Identity`
+- [x] Trimmed end of string decrypted string correctly
+
 ### Version 1.0.5
 - [x] Fixed a bug that could mistake a `Mixed Identity` for a `Strong Identity`
 
