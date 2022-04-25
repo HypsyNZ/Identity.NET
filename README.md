@@ -34,9 +34,9 @@ UniqueIdentity.Decrypt(string);
 
 ```cs
 UniqueIdentity.Initialize(pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp", 
-              				password: "SomeSecurePassword",
-                            useStrongIdentity: true,
-                            allowMixed: true);
+                                password: "SomeSecurePassword", 
+                       useStrongIdentity: true, 
+                              allowMixed: true);
 ```
 
 
