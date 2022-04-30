@@ -13,12 +13,12 @@ Create an Identity for the local PC, The identity is only created once for the P
 UniqueIdentity.Initialize();
 ```
 
-Encrypt a `string` using the local identity
+Encrypt a `string` using the local identity and no password
 ```cs
 UniqueIdentity.Encrypt(string);
 ```
 
-Decrypt a `string` using the local identity
+Decrypt a `string` using the local identity and no password
 ```cs
 UniqueIdentity.Decrypt(string);
 ```
@@ -46,25 +46,29 @@ UniqueIdentity.Initialize(pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp"
                        useStrongIdentity: true, 
                               allowMixed: true);
 ```
+# Encrypt/Decrypt Strings
 
-
-# Password Protection
-
-The `UniqueIdentity` itself can be protected with a password, Which makes it more Unique, It will be encrypted/decrypted automatically
-
-```cs
- UniqueIdentity.Initialize(password: "SomeSecurePassword");
-```
-
-`strings` can be password protected too
+`strings` that are Encrypted/Decrypted are automatically protected by the `Identity` and an optional password
 
 ```cs
 UniqueIdentity.Encrypt(string, "SomeDifferentSecurePassword");
 UniqueIdentity.Decrypt(string, "SomeDifferentSecurePassword");
 ```
 
-The password is not shared between `UniqueIdentity` and `Encrypt/Decrypt`, You will need to remember both.
+It is safe to use the `Default Identity` to `Encrypt/Decrypt` strings so long as you provide a password
 
+
+# Password Protection
+
+You can create a new `UniqueIdentity` for use with only your application and protect it with a different password
+
+```cs
+UniqueIdentity.Initialize(pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp", password: "SomeSecurePassword");
+```
+
+The password is not shared between the `UniqueIdentity` and `Encrypt/Decrypt`, You will need to remember both if you create a new `Identity`
+
+Strings can only be `Encrypted/Decrypted` by the `Identity` that created them
 
 # Strong / Mixed / Weak Identity
 
