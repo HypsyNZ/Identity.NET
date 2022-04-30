@@ -1,3 +1,9 @@
+### Version 2.0
+- [x] The `Path` is now part of the `Identity` if you move it then it will break.
+- [x] The `Path` also affects the `Strong Identity`
+- [x] The new `Identity` is prefixed with `V2`
+- [ ] This update is not backwards compatible.
+
 ### Version 1.0.7
 - [x] Default `Identity` can not be edited
 - [x] You can create your own password protected `Identity` by setting `pathToIdentity` and `password`
