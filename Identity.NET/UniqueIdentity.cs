@@ -29,9 +29,15 @@ namespace Identity.NET
         /// <param name="password">The additional password your data is secured with</param>
         /// <param name="allowMixed">Allow the use of mixed keys when using Weak Keys (Recommended)</param>
         /// <exception cref="Exception">Throws when identity is weak</exception>
+        /// <exception cref="ArgumentException">Throws when you try to edit the default identity</exception>
         /// <returns>Bool Indicating if the ID is Initialized</returns>
         public static bool Initialize(bool useStrongIdentity = true, string pathToIdentity = @"HKEY_LOCAL_MACHINE\SOFTWARE\Identity.NET", string password = "Identity.NET", bool allowMixed = true)
         {
+            if(pathToIdentity.Contains(@"SOFTWARE\Identity.NET") && password != "Identity.NET")
+            {
+                throw new ArgumentException("You can't edit the default Identity, Set pathToIdentity if you want to use a different password");
+            }
+
             Started = true;
             return Uid.Initialize(useStrongIdentity, pathToIdentity, password);
         }
