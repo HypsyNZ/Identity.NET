@@ -1,8 +1,29 @@
-﻿using Microsoft.Win32;
+﻿/*
+*MIT License
+*
+*Copyright (c) 2022 S Christison
+*
+*Permission is hereby granted, free of charge, to any person obtaining a copy
+*of this software and associated documentation files (the "Software"), to deal
+*in the Software without restriction, including without limitation the rights
+*to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+*copies of the Software, and to permit persons to whom the Software is
+*furnished to do so, subject to the following conditions:
+*
+*The above copyright notice and this permission notice shall be included in all
+*copies or substantial portions of the Software.
+*
+*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+*IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+*FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+*AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+*LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+*OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+*SOFTWARE.
+*/
+
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 
 namespace Identity.NET.Id
 {
@@ -14,17 +35,17 @@ namespace Identity.NET.Id
         {
             Machine.Path = pathToIdentity;
 
-            string ID = Registry.GetValue(Machine.Path, "Identity", "") as string;
-            string IDW = Registry.GetValue(Machine.Path, "Identity_Weak", "") as string;
-            string IDS = Registry.GetValue(Machine.Path, "Identity_Strong", "") as string;
+            string IDv2 = Registry.GetValue(Machine.Path, "IdentityV2", "") as string;
+            string IDWv2 = Registry.GetValue(Machine.Path, "IdentityV2_Weak", "") as string;
+            string IDSv2 = Registry.GetValue(Machine.Path, "IdentityV2_Strong", "") as string;
 
-            if (string.IsNullOrEmpty(ID) || string.IsNullOrEmpty(IDS) || string.IsNullOrEmpty(IDW))
+            if (string.IsNullOrWhiteSpace(IDv2) && string.IsNullOrWhiteSpace(IDWv2) && string.IsNullOrWhiteSpace(IDSv2))
             {
-                IdentitySuccess success = Machine.GetNewMachineID(useStrongIdentity, password, allowMixed);
+                IdentitySuccess success = Machine.GetNewMachineID(pathToIdentity, useStrongIdentity, password, allowMixed);
                 if (success.Success == true)
                 {
                     string half = success.Identity.Substring(50);
-                    UniqueID = Crypt.Decrypt(success.Identity, half, password);
+                    UniqueID = Crypt.Decrypt(success.Identity, half, password, Machine.Path);
                     return true;
                 }
 
@@ -32,23 +53,23 @@ namespace Identity.NET.Id
             }
             else
             {
-                if (ID != IDS && useStrongIdentity)
+                if (IDv2 != IDSv2 && useStrongIdentity)
                 {
                     throw new Exception("Identity is Weak");
                 }
 
                 if (useStrongIdentity)
                 {
-                    if (!Check.StrongID(IDS, password))
+                    if (!Check.StrongID(IDSv2, password))
                     {
                         throw new Exception("Identity Is Weak");
                     };
                 }
 
-                string half = ID.Substring(50);
+                string half = IDv2.Substring(50);
                 if (!string.IsNullOrEmpty(half))
                 {
-                    UniqueID = Crypt.Decrypt(ID, half, password);
+                    UniqueID = Crypt.Decrypt(IDv2, half, password, pathToIdentity);
                     return true;
                 }
             }

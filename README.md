@@ -29,6 +29,16 @@ Get the local `UUID` as a `string`
 string identity = UniqueIdentity.UUID;
 ```
 
+# Encrypt/Decrypt Strings
+
+`strings` that are Encrypted/Decrypted are automatically protected by the `Identity` and an optional password
+
+```cs
+UniqueIdentity.Encrypt(string, "SomeDifferentSecurePassword");
+UniqueIdentity.Decrypt(string, "SomeDifferentSecurePassword");
+```
+
+It is safe to use the `Default Identity` to `Encrypt/Decrypt` strings so long as you provide a password
 
 
 # Full Usage Options
@@ -46,19 +56,8 @@ UniqueIdentity.Initialize(pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp"
                        useStrongIdentity: true, 
                               allowMixed: true);
 ```
-# Encrypt/Decrypt Strings
 
-`strings` that are Encrypted/Decrypted are automatically protected by the `Identity` and an optional password
-
-```cs
-UniqueIdentity.Encrypt(string, "SomeDifferentSecurePassword");
-UniqueIdentity.Decrypt(string, "SomeDifferentSecurePassword");
-```
-
-It is safe to use the `Default Identity` to `Encrypt/Decrypt` strings so long as you provide a password
-
-
-# Password Protection
+# Password Protected Identity
 
 You can create a new `UniqueIdentity` for use with only your application and protect it with a different password
 
@@ -69,6 +68,7 @@ UniqueIdentity.Initialize(pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp"
 The password is not shared between the `UniqueIdentity` and `Encrypt/Decrypt`, You will need to remember both if you create a new `Identity`
 
 Strings can only be `Encrypted/Decrypted` by the `Identity` that created them
+
 
 # Strong / Mixed / Weak Identity
 
@@ -105,4 +105,6 @@ If you lose the `Identity` you will lose access to your data.
 pathToIdentity: @"HKEY_LOCAL_MACHINE\SOFTWARE\YourApp"
 ```
 
-You can manually `Export` the Identity from the `Registry` and store it on a `USB Stick`, But you will need to use `Password Protection` to get any benefit from this.
+You can manually `Export` the Identity from the `Registry` and store it on a `USB Stick`, But you will need to use optional `Password Protection` to get any benefit from this.
+
+You must also return the `Identity` to the same location in the `Registry` or it won't work.
