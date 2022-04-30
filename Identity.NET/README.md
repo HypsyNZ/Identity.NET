@@ -1,3 +1,7 @@
+### Version 1.0.7
+- [x] Default `Identity` can not be edited
+- [x] You can create your own password protected `Identity` by setting `pathToIdentity` and `password`
+
 ### Version 1.0.6
 - [x] Added `bool` indicating successful loading/creation of `Identity`
 - [x] Trimmed end of string decrypted string correctly
