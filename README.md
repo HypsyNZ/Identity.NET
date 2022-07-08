@@ -1,9 +1,6 @@
-# Identity.NET
+# Identity.NET [![](https://buildstats.info/nuget/Identity.NET)](https://www.nuget.org/packages/Identity.NET/)
 
-[![Nuget](https://img.shields.io/nuget/v/Identity.NET)](https://www.nuget.org/packages/Identity.NET/)
-
-Provides a Unique Identifier for the current PC and facility to Encrypt and Decrypt strings using that Identity
-
+Provides a Persistent Unique Identifier for the current PC and facility to Encrypt and Decrypt strings using that Identity
 
 # Default Usage
 
@@ -69,6 +66,13 @@ The password is not shared between the `UniqueIdentity` and `Encrypt/Decrypt`, Y
 
 Strings can only be `Encrypted/Decrypted` by the `Identity` that created them
 
+# Persistence
+
+A `Strong Identity` will persist even after `OS Reinstall` on any computer that meets the requirements to run `Windows 11`
+
+`UniqueIdentity` should persist on `Windows 10` but It depends on your whether there is a `TPM` present
+
+Machines that have no chance of persisting the `UniqueIdentity` will be `Weak` or `Mixed` more about this below
 
 # Strong / Mixed / Weak Identity
 

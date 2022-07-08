@@ -3,16 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <Version>2.0.2.2</Version>
+    <AssemblyVersion>2.0.2.2</AssemblyVersion>
+    <FileVersion>2.0.2.2</FileVersion>
     <Authors>S Christison</Authors>
     <Company>S Christison</Company>
     <Copyright>S Christison ©2022</Copyright>
     <PackageReleaseNotes>https://github.com/HypsyNZ/Identity.NET/tree/master/Identity.NET</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/HypsyNZ/Identity.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>identity, service, persist, strong</PackageTags>
+    <PackageTags>identity, service, persist, reinstall, strong, persistent, encrypt, decrypt, string, simple</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
@@ -25,7 +25,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <DebugType>embedded</DebugType>
-    <Description>Provides a Unique Identity to the Local PC and facilitates encrypting/decrypting strings based on that Identity</Description>
+    <Description>Provides a Persistent Unique Identity to the Local PC and facilitates Encrypting/Decrypting strings based on that Identity</Description>
     <PackageProjectUrl>https://github.com/HypsyNZ/Identity.NET</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
