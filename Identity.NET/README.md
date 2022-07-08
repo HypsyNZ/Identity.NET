@@ -1,3 +1,6 @@
+### Version 2.0.2.2
+- [x] Documentation
+
 ### Version 2.0
 - [x] The `Path` is now part of the `Identity` if you move it then it will break.
 - [x] The `Path` also affects the `Strong Identity`
